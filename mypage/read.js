@@ -4,7 +4,7 @@ async function getShaderSource(name) {
     const vert = await responsevert.text();
     console.log(vert);
 
-    vert2 = await fetch(`./${name}.vert`).then(response => response.text());
+    const vert2 = await fetch(`./${name}.vert`).then(response => response.text());
     console.log(vert2);
 
     const response = await fetch(`./${name}.frag`);
@@ -15,7 +15,7 @@ async function getShaderSource(name) {
 }
 
 async function main(){
-    outputele = document.getElementById("output");
+    const outputele = document.getElementById("output");
     outputele.innerHTML = "Hello";
 
     const [vert, frag]= await getShaderSource("basic");

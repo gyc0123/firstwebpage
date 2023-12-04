@@ -1,13 +1,12 @@
 function print(string) {
-    outputele = document.getElementById("output");
+    const outputele = document.getElementById("output");
     outputele.innerHTML += string + "\n";
 }
 
 async function getShaderSource(name) {
 
-    vert = await fetch(`./${name}.vert`)//.then(response => response.text());
-    frag = await fetch(`./${name}.frag`).then(response => response.text());
-
+    const vert = await fetch(`./${name}.vert`).then(response => response.text());
+    const frag = await fetch(`./${name}.frag`).then(response => response.text());
     return [vert, frag];
 }
 
@@ -22,7 +21,7 @@ function createShader(gl, type, source) {
 
     console.log(gl.getShaderInfoLog(shader));
     gl.deleteShader(shader);
-  }
+}
 
 function createProgram(gl, vertexShader, fragmentShader) {
     var program = gl.createProgram();
@@ -47,8 +46,8 @@ async function main(){
         // no webgl for you!
         alert("no webgl available");
     }
-    return;
-    [vertexShaderSource, fragmentShaderSource] = await getShaderSource("basic");
+    const shaderName = "basic";
+    const [vertexShaderSource, fragmentShaderSource] = await getShaderSource(shaderName);
     var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
     var program = createProgram(gl, vertexShader, fragmentShader);
